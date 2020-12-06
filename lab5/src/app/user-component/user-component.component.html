@@ -1,0 +1,91 @@
+<div class= "X">
+    <button (click)="logout()">Logout</button>
+    <h1>{{title}}</h1>
+    
+    <button class="buttonr" (click)="refresh()">Refresh</button><br><br>
+    
+    <div class="X">
+    
+      <h1>All Subjects</h1>
+      <button class="button1" (click)="viewSubjects()">View All Subjects</button>
+      
+        <ul>
+        <li *ngFor="let obj of items">
+          <span>Subject: {{obj.subject}}</span><br>
+          <span>Class Name: {{obj.className}}</span><br><br>
+        </li>
+        </ul>
+      
+      </div>
+    <div>
+      <input id ="listCode" type="text" placeholder="Enter a Subject"/>
+      <button class= "button" (click)="listCodes()">List Course Codes</button><br><br>
+    </div>
+    <div>
+      <div class = "search">
+        <label for = "subjectSearch"></label>
+        <input id="searchSub" type="text" placeholder="Subject.."/>
+    
+        <label for = "subjectSearch"></label>
+        <input id="searchCode" type="text" placeholder="Course Code.."/>
+    
+        <label for = "subjectSearch"></label>
+        <input id="searchComp" type="text" placeholder="Component.."/>
+        <button class= "button" (click)="search()">Search</button><br><br>
+      </div>
+    <div>
+      <input type="text" placeholder="Enter a Schedule..." id="q5Schedule">
+      <input type="text" placeholder="Enter Subject..." id = "q5Subject">
+      <input type="text" placeholder="Enter Course..." id = "q5Course">
+      <button  class= "button" (click)="addCourses()">Add Course</button><br><br>
+    </div>
+      <div>
+        <label for = "schedule" class="search"></label>
+        <input id = "scheduleInput" type = "text" placeholder ="Enter a schedule"/>
+        <button class= "button" (click)="addSchedule()">Add Schedule</button>
+        <button class= "button" (click)="displaySchedule()">Show Schedule</button>
+        <button class= "button"  (click) ="delSchedule()">Remove Schedule</button><br><br>
+    
+      </div>
+    
+    <button class="button2" (click)="viewSchedule()">View Schedules</button><br><br>
+    <button class="button3" (click)="deleteAll()">Delete All</button>
+    
+    <router-outlet></router-outlet>
+    <div class="X">
+    <ul>
+      <li *ngFor="let info of listInfo">
+        <span>Subject Name: {{info.subject}}</span><br><br>
+        <span>Course Code: {{info.catalog_nbr}}</span><br><br>
+        <span>Class Name: {{info.className}}</span><br><br>
+    
+        <span>Start Time: {{info.course_info[0].start_time}}</span><br><br>
+        <span>End Time: {{info.course_info[0].end_time}}</span><br><br>
+        <span>Component: {{info.course_info[0].ssr_component}}</span><br><br>
+        <span>Section: {{info.course_info[0].class_section}}</span><br><br>
+        <span>{{info.course_info[0].descrlong}}</span><br><br>
+        <span>Facility: {{info.course_info[0].facility_ID}}</span><br><br>
+      </li>
+    </ul>
+    
+    <ul>
+      <li *ngFor="let codes of listOfCodes">
+        <span>Course Code: {{codes.catalog_nbr}}</span><br><br>
+      </li>
+      </ul>
+    
+    <ul>
+      <li *ngFor="let oneSche of displayOne">
+        <span>Subject Name: {{oneSche.subject}}</span><br>
+        <span>Course Code: {{oneSche.catalog_nbr}}</span><br><br>
+      </li>
+      </ul>
+    
+    <ul>
+    <li *ngFor="let schedules of viewSche">
+      <span>Schedule Name: {{schedules.scheduleName}}</span><br>
+      <span>Number of Courses: {{schedules.numberOfCourses}}</span><br><br>
+    </li>
+    </ul>
+    </div>
+    </div>
