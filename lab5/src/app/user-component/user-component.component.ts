@@ -15,7 +15,6 @@ import { stringify } from 'querystring';
 export class UserComponentComponent {
 
   title = 'SE 3316 Lab 4';
-
   @Output() isLogout = new EventEmitter<void>()
   constructor(private subjectService: SubjectService, @Inject(DOCUMENT) document, public firebaseService: FirebaseService) { }
 
@@ -41,37 +40,7 @@ export class UserComponentComponent {
     })
   }
 
-  listInfo = [];
-  listDetail = [];
-  search() {
-
-    var sub = sanitize((<HTMLInputElement>document.getElementById("searchSub")).value)
-    var code = sanitize((<HTMLInputElement>document.getElementById("searchCode")).value)
-    var component = sanitize((<HTMLInputElement>document.getElementById("searchComp")).value)
-
-    var subUpper = sub.toUpperCase();
-
-    this.subjectService.onSearch(subUpper, code, component).subscribe((response: any) => {
-      alert("Successfully Displayed Results for: " + subUpper + " " + code + " " + component);
-
-      response.forEach(info => {
-        //info["course_info"] = JSON.stringify(info["course_info"]);
-        this.listInfo.push(info);
-      })
-
-      /*for (let info in response) {
-        console.log(info);
-        //info["course_info"] = JSON.stringify(info["course_info"]);
-        this.listInfo.push(response[info]);      
-      }*/
-      //this.listInfo=response;
-
-      JSON.stringify(this.listInfo);
-
-      console.log(JSON.stringify(this.listInfo));
-    })
-
-  }
+  
 
   addCourses() {
     var sche = sanitize((<HTMLInputElement>document.getElementById("q5Schedule")).value)
@@ -99,6 +68,7 @@ export class UserComponentComponent {
       console.log(this.listOfCodes);
     })
   }
+  
   addSchedule() {
     var add = (<HTMLInputElement>document.getElementById("scheduleInput")).value
     this.subjectService.addSche(add).subscribe((response: any) => {
@@ -106,6 +76,7 @@ export class UserComponentComponent {
       console.log(JSON.stringify(response));
     })
   }
+
   displayOne = [];
 
   displaySchedule() {

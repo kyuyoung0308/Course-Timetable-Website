@@ -13,7 +13,7 @@ const ip = window.location.href.substr(0, window.location.href.length -1)
 })
 export class SubjectService {
 
-  url: string = ip + ':3000/api'
+  url: string = "http://localhost" + ':3000/api'
 
   constructor(private http: HttpClient) {
 
@@ -21,7 +21,11 @@ export class SubjectService {
 
   onSearch(subject, course, component) {
     console.log(`${this.url}/question3/` + subject + `/` + course+`/`+component);
-    return this.http.get(`${this.url}/question3/` + subject + `/` + course+`/`+component);
+    if(course === ""){
+      return this.http.get(`${this.url}/question3/` + subject);
+    }
+    else
+      return this.http.get(`${this.url}/question3/` + subject + `/` + course+`/`+component);
   }
 
   addCourse(schedule, subject, course) {
@@ -41,8 +45,12 @@ export class SubjectService {
 
   addSche(schedule) {
     var san = sanitize(schedule);
-    return this.http.put(`${this.url}/question4/new/` + san, httpOptions)
+    var mail = JSON.parse(localStorage.user).email;
+    var userName = mail.split("@");
+    console.log(userName[0]);
+    return this.http.put(`${this.url}/authentic/new/` + san+'/'+ userName[0], httpOptions)
   }
+
 
   list(subject) {
     var san = sanitize(subject);

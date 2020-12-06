@@ -21,18 +21,8 @@
       <input id ="listCode" type="text" placeholder="Enter a Subject"/>
       <button class= "button" (click)="listCodes()">List Course Codes</button><br><br>
     </div>
-    <div>
-      <div class = "search">
-        <label for = "subjectSearch"></label>
-        <input id="searchSub" type="text" placeholder="Subject.."/>
-    
-        <label for = "subjectSearch"></label>
-        <input id="searchCode" type="text" placeholder="Course Code.."/>
-    
-        <label for = "subjectSearch"></label>
-        <input id="searchComp" type="text" placeholder="Component.."/>
-        <button class= "button" (click)="search()">Search</button><br><br>
-      </div>
+
+
     <div>
       <input type="text" placeholder="Enter a Schedule..." id="q5Schedule">
       <input type="text" placeholder="Enter Subject..." id = "q5Subject">
@@ -53,20 +43,8 @@
     
     <router-outlet></router-outlet>
     <div class="X">
-    <ul>
-      <li *ngFor="let info of listInfo">
-        <span>Subject Name: {{info.subject}}</span><br><br>
-        <span>Course Code: {{info.catalog_nbr}}</span><br><br>
-        <span>Class Name: {{info.className}}</span><br><br>
     
-        <span>Start Time: {{info.course_info[0].start_time}}</span><br><br>
-        <span>End Time: {{info.course_info[0].end_time}}</span><br><br>
-        <span>Component: {{info.course_info[0].ssr_component}}</span><br><br>
-        <span>Section: {{info.course_info[0].class_section}}</span><br><br>
-        <span>{{info.course_info[0].descrlong}}</span><br><br>
-        <span>Facility: {{info.course_info[0].facility_ID}}</span><br><br>
-      </li>
-    </ul>
+        
     
     <ul>
       <li *ngFor="let codes of listOfCodes">
