@@ -19,6 +19,10 @@ export class SubjectService {
 
   }
 
+  keyword(key){
+    return this.http.get(`${this.url}/keywords/` +key);
+  }
+
   onSearch(subject, course, component) {
     console.log(`${this.url}/question3/` + subject + `/` + course+`/`+component);
     if(course === "" && component === ""){

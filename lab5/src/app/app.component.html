@@ -24,17 +24,49 @@
   <div class="search">
     <h2>Search for Courses</h2>
     <label for="subjectSearch"></label>
-    <input id="searchSub" type="text" placeholder="Subject.." />
+    <input id="searchSub" type="text" placeholder="Subject..." />
 
     <label for="subjectSearch"></label>
-    <input id="searchCode" type="text" placeholder="Course Code.." />
+    <input id="searchCode" type="text" placeholder="Course Code..." />
 
     <label for="subjectSearch"></label>
-    <input id="searchComp" type="text" placeholder="Component.." />
+    <input id="searchComp" type="text" placeholder="Component..." />
     <button class="button" (click)="search()">Search</button><br><br>
 
   </div>
+  <div>
+    <hr>
+    <h2>Search By Keyword</h2>
+    <label for="keywordSearch"></label>
+    <input id="searchKey" type="text" placeholder="Keyword..." />
 
+    <button class="button" (click)="searchKeyword()">Search By Keyword</button><br><br>
+
+  </div>
+  <div>
+    <hr>
+    <h2>Copyright Enforcement</h2>
+    <h3>Security and Privacy</h3><br>
+    <div class="container" [class.show]="show2">
+      <br><br>
+      <span>Info</span><br><br>
+    </div>
+    <button (click)="show2 = !show2 ">{{ show2 ? 'Show less': 'Show More' }}</button>
+    <hr>
+    <h3>Acceptable Use Policy (AUP)</h3><br>
+    <div class="container" [class.show]="show3">
+      <br><br>
+      <span>Info</span><br><br>
+    </div>
+    <button (click)="show3 = !show3 ">{{ show3 ? 'Show less': 'Show More' }}</button>
+    <hr>
+    <h3>DMCA Notice and Takedown Policy</h3><br>
+    <div class="container" [class.show]="show4">
+      <br><br>
+      <span>Info</span><br><br>
+    </div>
+    <button (click)="show4 = !show4 ">{{ show4 ? 'Show less': 'Show More' }}</button>
+  </div>
   <ul>
     <li *ngFor="let info of listInfo">
       <hr>
