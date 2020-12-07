@@ -31,6 +31,8 @@ export class SubjectService {
   addCourse(schedule, subject, course) {
 
     var sanSchedule = sanitize(schedule);
+    var mail = JSON.parse(localStorage.user).email;
+    var userName = mail.split("@");
     
     var pair = [{
       "subject": `${subject}`,
@@ -40,14 +42,14 @@ export class SubjectService {
 
     console.log(JSON.stringify(pair));
 
-    return this.http.put(`${this.url}/question5/newcourse/` + sanSchedule, body, httpOptions)
+    return this.http.put(`${this.url}/create/newcourse/` + sanSchedule +`/`+userName[0], body, httpOptions)
   }
 
   addSche(schedule) {
     var san = sanitize(schedule);
     var mail = JSON.parse(localStorage.user).email;
     var userName = mail.split("@");
-    console.log(userName[0]);
+
     return this.http.put(`${this.url}/authentic/new/` + san+'/'+ userName[0], httpOptions)
   }
 

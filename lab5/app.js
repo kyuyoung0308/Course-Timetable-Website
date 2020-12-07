@@ -122,41 +122,6 @@ router.get('/keywords/:key', (req, res) => {
     res.send(array);
 })
 
-//Question 4
-router.put('/question4/new/:schedule', (req, res) => {
-
-    const s = req.params.schedule;
-
-    var exist = false;
-
-    var sche = JSON.parse(fs.readFileSync('schedule.json', 'utf8'));
-
-    sche.forEach((element) => {
-        if (element.scheduleName === s) {
-            exist = true;
-        }
-    });
-
-    if (exist) {
-        res.status(403).send("The specified timetable already exists");
-    } else {
-        var newSche = JSON.parse(`{"scheduleName": "", "courses":[]}`);
-        newSche.scheduleName = s;
-        sche.push(newSche);
-        var jsonString = JSON.stringify(sche)
-
-        fs.writeFileSync('schedule.json', jsonString, err => {
-            if (err) {
-                console.log('Error writing file', err)
-            } else {
-                console.log('Successfully wrote file')
-            }
-        })
-        res.send(sche);
-    }
-    
-
-});
 
 //authentic user
 router.put('/authentic/new/:schedule/:user', (req, res) => {
@@ -165,9 +130,13 @@ router.put('/authentic/new/:schedule/:user', (req, res) => {
     var u = req.params.user;
 
     var exist = false;
+    var sche = [];
 
-    fs.writeFile('users-'+u+'.json');
-    var sche = JSON.parse(fs.readFileSync('users-'+u+'.json', 'utf8'));
+    try {
+        sche = JSON.parse(fs.readFileSync('users-' + u + '.json', 'utf8'));
+        
+    }catch (err) {
+    }
 
     if (exist) {
         res.status(403).send("The specified timetable already exists");
@@ -177,7 +146,7 @@ router.put('/authentic/new/:schedule/:user', (req, res) => {
         sche.push(newSche);
         var jsonString = JSON.stringify(sche)
 
-        fs.writeFileSync('users-'+u+'.json', jsonString, err => {
+        fs.writeFileSync('users-' + u + '.json', jsonString, err => {
             if (err) {
                 console.log('Error writing file', err)
             } else {
@@ -186,21 +155,23 @@ router.put('/authentic/new/:schedule/:user', (req, res) => {
         })
         res.send(sche);
     }
-    
+
 
 });
+
 
 //Question 5 Save a list of subject code, course code pairs under a given schedule name. 
 //Return an error if the schedule name does not exist. Replace existing subject-code + course-code pairs 
 //with new values and create new pairs if it doesn’t exist.
-router.put('/question5/newcourse/:schedule', (req, res) => {
+router.put('/create/newcourse/:schedule/:user', (req, res) => {
 
     const keyPairs = req.body;
     const s = req.params.schedule;
+    var u = req.params.user;
 
     var exist = false;
 
-    var sche = JSON.parse(fs.readFileSync('schedule.json', 'utf8'));
+    var sche = JSON.parse(fs.readFileSync('users-' + u + '.json', 'utf8'));
 
     sche.forEach((element) => {
         if (element.scheduleName === s) {
@@ -220,7 +191,7 @@ router.put('/question5/newcourse/:schedule', (req, res) => {
 
         var jsonString = JSON.stringify(sche)
 
-        fs.writeFileSync('schedule.json', jsonString, err => {
+        fs.writeFileSync('users-' + u + '.json', jsonString, err => {
             if (err) {
                 console.log('Error writing file', err)
             } else {
@@ -232,6 +203,7 @@ router.put('/question5/newcourse/:schedule', (req, res) => {
     res.send(sche);
 
 });
+
 
 //Question 6 Get the list of subject code, course code pairs for a given schedule.
 router.get('/question6/courselist/:schedule', (req, res) => {
@@ -246,7 +218,7 @@ router.get('/question6/courselist/:schedule', (req, res) => {
             err = false;
         }
     });
-    
+
     if (err) {
         res.status(403).send("The specified schedule does not exist");
     }

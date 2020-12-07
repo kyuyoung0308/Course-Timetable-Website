@@ -42,7 +42,7 @@ export class AppComponent {
   listDetail = [];
 
   search() {
-    console.log("AS");
+    //console.log("AS");
     var sub = sanitize((<HTMLInputElement>document.getElementById("searchSub")).value)
     var code = sanitize((<HTMLInputElement>document.getElementById("searchCode")).value)
     var component = sanitize((<HTMLInputElement>document.getElementById("searchComp")).value)
