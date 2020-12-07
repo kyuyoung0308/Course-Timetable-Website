@@ -61,7 +61,9 @@ export class SubjectService {
 
   displaySche(schedule) {
     var san = sanitize(schedule)
-    return this.http.get(`${this.url}/question6/courselist/` + san)
+    var mail = JSON.parse(localStorage.user).email;
+    var userName = mail.split("@");
+    return this.http.get(`${this.url}/authcourse/courselist/` + san+'/'+userName[0])
   }
 
   viewSubject() {
@@ -71,8 +73,9 @@ export class SubjectService {
   }
 
   viewSchedules() {
-    console.log(this.url);
-    return this.http.get(`${this.url}/question8/allschedules/list`);
+    var mail = JSON.parse(localStorage.user).email;
+    var userName = mail.split("@");
+    return this.http.get(`${this.url}/authall/allschedules/list`+'/'+userName[0]);
 
   }
   deleteSchedule(schedule) {

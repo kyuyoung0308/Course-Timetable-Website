@@ -1,1 +1,29 @@
-[{"scheduleName":"www","courses":[{"subject":"MATH","catalog_nbr":"2204"}]}]
+[
+    {
+        "scheduleName": "www",
+        "courses": [
+            {
+                "subject": "MATH",
+                "catalog_nbr": "2204"
+            }
+        ]
+    },
+    {
+        "scheduleName": "world",
+        "courses": [
+            {
+                "subject": "SE",
+                "catalog_nbr": "3316A"
+            }
+        ]
+    },
+    {
+        "scheduleName": "hello",
+        "courses": [
+            {
+                "subject": "MATH",
+                "catalog_nbr": "0105A"
+            }
+        ]
+    }
+]

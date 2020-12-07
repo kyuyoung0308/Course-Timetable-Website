@@ -206,10 +206,11 @@ router.put('/create/newcourse/:schedule/:user', (req, res) => {
 
 
 //Question 6 Get the list of subject code, course code pairs for a given schedule.
-router.get('/question6/courselist/:schedule', (req, res) => {
+router.get('/authcourse/courselist/:schedule/:user', (req, res) => {
 
     var schedule = req.params.schedule;
-    var sche = JSON.parse(fs.readFileSync('schedule.json', 'utf8'));
+    var u = req.params.user;
+    var sche = JSON.parse(fs.readFileSync('users-' + u + '.json', 'utf8'));
     var err = true;
 
     sche.forEach((s) => {
@@ -259,19 +260,23 @@ router.delete('/question7/deleteschedule/:schedule', (req, res) => {
 
 });
 
+
+
 //Question 8 Get a list of schedule names and the number of courses that are saved in each schedule.
-router.get('/question8/allschedules/list', (req, res) => {
+router.get('/authall/allschedules/list/:user', (req, res) => {
 
-    var sche = JSON.parse(fs.readFileSync('schedule.json', 'utf8'));
-    var lists = [];
-    sche.forEach((element) => {
-        var pair = JSON.parse(`{"scheduleName": "${element.scheduleName}", "numberOfCourses": "${element.courses.length}"}`);
-
-        lists.push(pair);
-    });
-    res.send(lists);
-
+    var u = req.params.user;
+    var sche = JSON.parse(fs.readFileSync('users-' + u + '.json', 'utf8'));
+    //var lists = [];
+    res.send(sche);
 });
+
+
+
+
+
+
+
 //Question 9 Delete all schedules.
 router.delete('/question9/delete/all/schedules', (req, res) => {
 

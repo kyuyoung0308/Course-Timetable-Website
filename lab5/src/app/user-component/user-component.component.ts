@@ -40,8 +40,6 @@ export class UserComponentComponent {
     })
   }
 
-  
-
   addCourses() {
     var sche = sanitize((<HTMLInputElement>document.getElementById("q5Schedule")).value)
     var sub = sanitize((<HTMLInputElement>document.getElementById("q5Subject")).value)
@@ -68,7 +66,7 @@ export class UserComponentComponent {
       console.log(this.listOfCodes);
     })
   }
-  
+
   addSchedule() {
     var add = (<HTMLInputElement>document.getElementById("scheduleInput")).value
     this.subjectService.addSche(add).subscribe((response: any) => {
@@ -100,10 +98,12 @@ export class UserComponentComponent {
 
     })
   }
+
   viewSche = [];
   viewSchedule() {
     this.subjectService.viewSchedules().subscribe((response: any) => {
       for (let subject in response) {
+  
         this.viewSche.push(response[subject]);
       }
       JSON.stringify(this.viewSche);
@@ -111,6 +111,7 @@ export class UserComponentComponent {
       console.log(JSON.stringify(response));
     })
   }
+
   deleteAll() {
     this.subjectService.delete().subscribe((response: any) => {
       console.log("yes");
