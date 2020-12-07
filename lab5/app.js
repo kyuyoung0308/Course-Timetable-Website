@@ -93,7 +93,9 @@ router.get('/question3/:subjectId/:course?/:component?', (req, res) => {
         if (subjectId === subject && typeof course === "undefined" && typeof component === "undefined") {
             array.push(info);
         }
-        else if (subjectId === subject && course === courseCode && typeof component !== "undefined") {
+        else if (subjectId === subject && course === courseCode && typeof component === "undefined") {
+            array.push(info);
+        }else if (subjectId === subject && course === courseCode && typeof component !== "undefined") {
             array.push(info);
         }
     })

@@ -2,10 +2,11 @@
 <div *ngIf="!isSignedIn">
 
   <h2>About</h2>
-  <p>This website offers users to search for timetables and for authenticated users to </p>
+  <p>This website offers unauthenticated users to search for timetables and course reviews and for authenticated users to create schedules(timetables) as well as write course reviews!</p>
+  <p>Sign up now if you haven't. If you are authenticated Sign in below!</p>
   <h2>Sign Up!</h2>
-  <input type="text" #emailSignup />
-  <input type="text" #passwordSignup />
+  <input type="text" placeholder="Enter Email..." #emailSignup />
+  <input type="text" placeholder="Enter Password..." #passwordSignup />
   <button (click)="onSignup(emailSignup.value,passwordSignup.value)">Sign Up</button>
 </div>
 
@@ -13,8 +14,8 @@
 
 <div *ngIf="!isSignedIn">
   <h2>Sign In!</h2>
-  <input type="text" #email />
-  <input type="text" #password />
+  <input type="text" placeholder="Enter Email..." #email />
+  <input type="text" placeholder="Enter Password..." #password />
   <button (click)="onSignin(email.value,password.value)">Sign In</button>
 </div>
 <hr>
@@ -36,21 +37,25 @@
 
   <ul>
     <li *ngFor="let info of listInfo">
-      <span>Subject Name: {{info.subject}}</span><br><br>
-      <span>Course Code: {{info.catalog_nbr}}</span><br><br>
+      <hr>
+      <span>Subject Name: {{info.subject}}</span><br>
+      <span>Course Code: {{info.catalog_nbr}}</span><br>
+      <span>Section: {{info.course_info[0].class_section}}</span><br>
+      <span>Component: {{info.course_info[0].ssr_component}}</span><br>
       
       <div class="container" [class.show]="info.show">
       <span>Class Name: {{info.className}}</span><br><br>
 
       <span>Start Time: {{info.course_info[0].start_time}}</span><br><br>
       <span>End Time: {{info.course_info[0].end_time}}</span><br><br>
-      <span>Component: {{info.course_info[0].ssr_component}}</span><br><br>
-      <span>Section: {{info.course_info[0].class_section}}</span><br><br>
+      
+
       <span>{{info.course_info[0].descrlong}}</span><br><br>
       <span>Facility: {{info.course_info[0].facility_ID}}</span></div>
     <button (click)="info.show = !info.show ">{{ !info.show ? 'Show less': 'Show More' }}</button>
     </li>
   </ul>
+  <hr>
 </div>
 <app-user-component *ngIf="isSignedIn" (isLogout)="handleLogout()">Log out</app-user-component>
 <app-register-component *ngIf = "isSignedIn && isAdmin" (isLogout)="handleLogout()">Log out</app-register-component>

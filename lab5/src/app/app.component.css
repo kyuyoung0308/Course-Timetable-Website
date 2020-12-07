@@ -68,6 +68,9 @@ body{
     text-align: center;
     font-family: 'Baloo Tamma', cursive;
   }
+  p{
+    text-align:center;
+  }
   li{
     color: #2c3e50;
     font-size: 18px;

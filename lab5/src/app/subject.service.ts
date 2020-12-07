@@ -21,8 +21,11 @@ export class SubjectService {
 
   onSearch(subject, course, component) {
     console.log(`${this.url}/question3/` + subject + `/` + course+`/`+component);
-    if(course === ""){
+    if(course === "" && component === ""){
       return this.http.get(`${this.url}/question3/` + subject);
+    }
+    else if (component === "" && typeof subject !== "undefined" && typeof course !== "undefined"){
+      return this.http.get(`${this.url}/question3/` + subject + `/` + course);
     }
     else
       return this.http.get(`${this.url}/question3/` + subject + `/` + course+`/`+component);
