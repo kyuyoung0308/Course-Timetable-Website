@@ -80,10 +80,28 @@ export class SubjectService {
   }
   deleteSchedule(schedule) {
     var san = sanitize(schedule);
-    return this.http.delete(`${this.url}/question7/deleteschedule/` + san);
+    var mail = JSON.parse(localStorage.user).email;
+    var userName = mail.split("@");
+    return this.http.delete(`${this.url}/users/deleteschedule/` + san+'/'+userName[0]);
   }
   delete() {
     return this.http.delete(`${this.url}/question9/delete/all/schedules`);
+  }
+  addRev(courseId, review){
+    var sanCourse = sanitize(courseId);
+    var sanReview = sanitize(review);
+    var mail = JSON.parse(localStorage.user).email;
+    var userName = mail.split("@");
+    
+    var pair = [{
+      "catalog_nbr": `${sanCourse}`,
+      "review": `${sanReview}`
+    }]
+    var body = pair
+
+    console.log(JSON.stringify(pair));
+
+    return this.http.put(`${this.url}/create/newcourse/` + sanCourse +`/`+userName[0], body, httpOptions)
   }
 
 }

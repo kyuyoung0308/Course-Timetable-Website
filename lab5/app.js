@@ -226,11 +226,12 @@ router.get('/authcourse/courselist/:schedule/:user', (req, res) => {
 });
 
 //Question 7 Delete a schedule with a given name. Return an error if the given schedule doesn’t exist
-router.delete('/question7/deleteschedule/:schedule', (req, res) => {
+router.delete('/users/deleteschedule/:schedule/:user', (req, res) => {
     const s = req.params.schedule;
+    var u = req.params.user
     var exist = false;
 
-    var sche = JSON.parse(fs.readFileSync('schedule.json', 'utf8'));
+    var sche = JSON.parse(fs.readFileSync('users-' + u + '.json', 'utf8'));
 
     sche.forEach((element) => {
         if (element.scheduleName === s) {
@@ -248,7 +249,7 @@ router.delete('/question7/deleteschedule/:schedule', (req, res) => {
         }
         var jsonString = JSON.stringify(sche)
 
-        fs.writeFileSync('schedule.json', jsonString, err => {
+        fs.writeFileSync('users-' + u + '.json', jsonString, err => {
             if (err) {
                 console.log('Error writing file', err)
             } else {

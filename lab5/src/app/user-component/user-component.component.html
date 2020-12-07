@@ -40,6 +40,12 @@
 
     <button class="button2" (click)="viewSchedule()">View Schedules</button><br><br>
     <button class="button3" (click)="deleteAll()">Delete All</button>
+    <div>
+        <h2>Write a Review About a Course</h2>
+        <input type="text" placeholder="Course Name..." id="reviewCourse">
+        <input type="text" placeholder="Write a Review..." id="reviewText">
+        <button class="button" (click)="addReview()">Add Review</button><br><br>
+    </div>
 
 
     <div class="X">
@@ -56,8 +62,10 @@
             </li>
         </ul>
         <ul>
+
             <li *ngFor="let subject of viewSche">
                 <span>Schedule Name: {{subject.scheduleName}}</span><br>
+                <span>Last Edited: <p id="demo"></p></span>
                 <div class="container" [class.show]="subject.show">
                     <ul>
                         <li *ngFor="let course of subject.courses">

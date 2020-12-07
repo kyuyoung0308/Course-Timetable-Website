@@ -24,7 +24,7 @@ export class UserComponentComponent {
 
   items = [];
 
-  logout(){
+  logout() {
     this.firebaseService.logout()
     this.isLogout.emit()
   }
@@ -45,11 +45,12 @@ export class UserComponentComponent {
     var sub = sanitize((<HTMLInputElement>document.getElementById("q5Subject")).value)
     var course = sanitize((<HTMLInputElement>document.getElementById("q5Course")).value)
 
+    var lastModified = document.lastModified;
+
     this.subjectService.addCourse(sche, sub, course).subscribe((response: any) => {
       alert("Successfully Added " + sub + " " + course + " to: " + sche);
-      console.log(JSON.stringify(response));
+      console.log(lastModified);
     })
-
   }
 
   listOfCodes = [];
@@ -68,6 +69,7 @@ export class UserComponentComponent {
   }
 
   addSchedule() {
+
     var add = (<HTMLInputElement>document.getElementById("scheduleInput")).value
     this.subjectService.addSche(add).subscribe((response: any) => {
       alert("Successfully Added a Schedule Named: " + sanitize(add));
@@ -79,15 +81,15 @@ export class UserComponentComponent {
 
   displaySchedule() {
     var display = (<HTMLInputElement>document.getElementById("scheduleInput")).value
+
     console.log(display);
+
     this.subjectService.displaySche(display).subscribe((response: any) => {
       alert("Successfully Displayed: " + sanitize(display));
       for (let classes in response) {
         this.displayOne.push(response[classes]);
       }
-      JSON.stringify(this.displayOne);
-      console.log(JSON.stringify(this.displayOne));
-      console.log(JSON.stringify(response));
+
     })
   }
   delSchedule() {
@@ -103,6 +105,8 @@ export class UserComponentComponent {
   viewSchedule() {
     this.subjectService.viewSchedules().subscribe((response: any) => {
       console.log(response);
+
+
       for (let subject in response) {
         response[subject]["show"] = false;
         this.viewSche.push(response[subject]);
@@ -118,6 +122,14 @@ export class UserComponentComponent {
       console.log("yes");
     })
   }
+  addReview() {
+    var courseId = (<HTMLInputElement>document.getElementById("reviewCourse")).value
+    var review = (<HTMLInputElement>document.getElementById("reviewText")).value
+    this.subjectService.addRev(courseId, review).subscribe((response: any) => {
+      alert("Success!!!");
+  })
+
+}
 }
 function sanitize(string) {
   const map = {
