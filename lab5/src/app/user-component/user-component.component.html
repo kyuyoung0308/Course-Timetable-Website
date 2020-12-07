@@ -56,8 +56,18 @@
             </li>
         </ul>
         <ul>
-            <li *ngFor="let schedules of viewSche">
-                <span>Schedule Name: {{schedules.scheduleName}}</span><br>
+            <li *ngFor="let subject of viewSche">
+                <span>Schedule Name: {{subject.scheduleName}}</span><br>
+                <div class="container" [class.show]="subject.show">
+                    <ul>
+                        <li *ngFor="let course of subject.courses">
+                            <br>
+                            <span>Subject Name: {{course.subject}}</span><br>
+                            <span>Course Code: {{course.catalog_nbr}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <button (click)="subject.show = !subject.show ">{{ subject.show ? 'Show less': 'Show More' }}</button>
             </li>
         </ul>
     </div>

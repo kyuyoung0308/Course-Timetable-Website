@@ -102,11 +102,12 @@ export class UserComponentComponent {
   viewSche = [];
   viewSchedule() {
     this.subjectService.viewSchedules().subscribe((response: any) => {
+      console.log(response);
       for (let subject in response) {
-  
+        response[subject]["show"] = false;
         this.viewSche.push(response[subject]);
       }
-      JSON.stringify(this.viewSche);
+      //JSON.stringify(this.viewSche);
       console.log(JSON.stringify(this.viewSche));
       console.log(JSON.stringify(response));
     })
