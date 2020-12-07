@@ -7,12 +7,21 @@ import {AngularFireAuth} from '@angular/fire/auth'
 export class FirebaseService {
 
   isLoggedIn = false
+  isAdmin = false
   
   constructor(public firebaseAuth : AngularFireAuth) { }
   async signin(email: string, password: string){
     await this.firebaseAuth.signInWithEmailAndPassword(email,password)
     .then(res=>{
       this.isLoggedIn = true
+      localStorage.setItem('user',JSON.stringify(res.user))
+    })
+  }
+  async signadmin(email: string, password: string){
+    await this.firebaseAuth.signInWithEmailAndPassword(email,password)
+    .then(res=>{
+      this.isLoggedIn = true
+      this.isAdmin = true
       localStorage.setItem('user',JSON.stringify(res.user))
     })
   }

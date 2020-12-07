@@ -1,5 +1,5 @@
 <h1> SE 3316 Lab 5</h1>
-<div *ngIf="!isSignedIn">
+<div *ngIf="!isSignedIn && !isAdmin">
 
   <h2>About</h2>
   <p>This website offers unauthenticated users to search for timetables and course reviews and for authenticated users to create schedules(timetables) as well as write course reviews!</p>
@@ -12,14 +12,14 @@
 
 <hr>
 
-<div *ngIf="!isSignedIn">
+<div *ngIf="!isSignedIn && !isAdmin">
   <h2>Sign In!</h2>
   <input type="text" placeholder="Enter Email..." #email />
   <input type="text" placeholder="Enter Password..." #password />
   <button (click)="onSignin(email.value,password.value)">Sign In</button>
 </div>
 <hr>
-<div *ngIf="!isSignedIn">
+<div *ngIf="!isSignedIn && !isAdmin">
 
   <div class="search">
     <h2>Search for Courses</h2>
@@ -43,30 +43,7 @@
     <button class="button" (click)="searchKeyword()">Search By Keyword</button><br><br>
 
   </div>
-  <div>
-    <hr>
-    <h2>Copyright Enforcement</h2>
-    <h3>Security and Privacy</h3><br>
-    <div class="container" [class.show]="show2">
-      <br><br>
-      <span>Info</span><br><br>
-    </div>
-    <button (click)="show2 = !show2 ">{{ show2 ? 'Show less': 'Show More' }}</button>
-    <hr>
-    <h3>Acceptable Use Policy (AUP)</h3><br>
-    <div class="container" [class.show]="show3">
-      <br><br>
-      <span>Info</span><br><br>
-    </div>
-    <button (click)="show3 = !show3 ">{{ show3 ? 'Show less': 'Show More' }}</button>
-    <hr>
-    <h3>DMCA Notice and Takedown Policy</h3><br>
-    <div class="container" [class.show]="show4">
-      <br><br>
-      <span>Info</span><br><br>
-    </div>
-    <button (click)="show4 = !show4 ">{{ show4 ? 'Show less': 'Show More' }}</button>
-  </div>
+  
   <ul>
     <li *ngFor="let info of listInfo">
       <hr>
@@ -89,5 +66,37 @@
   </ul>
   <hr>
 </div>
-<app-user-component *ngIf="isSignedIn" (isLogout)="handleLogout()">Log out</app-user-component>
+<app-login-component *ngIf ="!isSignedIn && click"></app-login-component>
+<!--<div>
+  <hr>
+  <h2>Copyright Enforcement</h2>
+  <h3>Security and Privacy</h3><br>
+  <div class="container" [class.show]="show">
+    <br><br>
+    <span>Info</span><br><br>
+  </div>
+  <button (click)="show = !show ">{{ show ? 'Show less': 'Show More' }}</button>
+  <hr>
+  <h3>Acceptable Use Policy (AUP)</h3><br>
+  <div class="container" [class.show]="show">
+    <br><br>
+    <span>Info</span><br><br>
+  </div>
+  <button (click)="show = !show ">{{ show ? 'Show less': 'Show More' }}</button>
+  <hr>
+  <h3>DMCA Notice and Takedown Policy</h3><br>
+  <div class="container" [class.show]="show">
+    <br><br>
+    <span>Info</span><br><br>
+  </div>
+  <button (click)="show = !show ">{{ show ? 'Show less': 'Show More' }}</button>
+</div>-->
+<br><br>
+<div *ngIf="!isSignedIn">
+  <h2>Adminstrator</h2>
+  <input type="text" placeholder="Enter Email..." #email />
+  <input type="text" placeholder="Enter Password..." #password /><br>
+  <button (click)="onSignadmin(email.value,password.value)">Login as Admin</button><br><br>
+</div>
+<app-user-component *ngIf="isSignedIn && !isAdmin" (isLogout)="handleLogout()">Log out</app-user-component>
 <app-register-component *ngIf = "isSignedIn && isAdmin" (isLogout)="handleLogout()">Log out</app-register-component>

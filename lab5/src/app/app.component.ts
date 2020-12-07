@@ -14,7 +14,7 @@ import { stringify } from 'querystring';
 export class AppComponent {
   isSignedIn = false
   isAdmin = false
-
+  click = false;
   constructor(private subjectService: SubjectService, public firebaseService: FirebaseService) {
 
   }
@@ -23,6 +23,9 @@ export class AppComponent {
       this.isSignedIn = true
     else
       this.isSignedIn = false
+  }
+  async admin(){
+    this.click = true;
   }
   async onSignup(email: string, password: string) {
     await this.firebaseService.signup(email, password)
@@ -34,9 +37,15 @@ export class AppComponent {
     if (this.firebaseService.isLoggedIn)
       this.isSignedIn = true
   }
+  async onSignadmin(email: string, password: string) {
+    await this.firebaseService.signadmin(email, password)
+    if (this.firebaseService.isLoggedIn)
+      this.isSignedIn = true
+      this.isAdmin = true
+  }
   handleLogout() {
     this.isSignedIn = false
-
+    this.isAdmin = false
   }
   listInfo = [];
   listDetail = [];
@@ -48,9 +57,10 @@ export class AppComponent {
     var component = sanitize((<HTMLInputElement>document.getElementById("searchComp")).value)
 
     var subUpper = sub.toUpperCase();
+    var codeUpper = code.toUpperCase();
 
-    this.subjectService.onSearch(subUpper, code, component).subscribe((response: any) => {
-      alert("Successfully Displayed Results for: " + subUpper + " " + code + " " + component);
+    this.subjectService.onSearch(subUpper, codeUpper, component).subscribe((response: any) => {
+      alert("Successfully Displayed Results for: " + subUpper + " " + codeUpper + " " + component);
 
       response.forEach(info => {
         //info["course_info"] = JSON.stringify(info["course_info"]);
