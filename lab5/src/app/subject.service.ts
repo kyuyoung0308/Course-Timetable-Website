@@ -94,6 +94,7 @@ export class SubjectService {
     var userName = mail.split("@");
     
     var pair = [{
+      "user": `${userName[0]}`,
       "catalog_nbr": `${sanCourse}`,
       "review": `${sanReview}`
     }]
@@ -101,7 +102,7 @@ export class SubjectService {
 
     console.log(JSON.stringify(pair));
 
-    return this.http.put(`${this.url}/create/newcourse/` + sanCourse +`/`+userName[0], body, httpOptions)
+    return this.http.put(`${this.url}/add/review/` + sanCourse +`/`+userName[0], body, httpOptions)
   }
 
 }

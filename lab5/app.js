@@ -134,8 +134,8 @@ router.put('/authentic/new/:schedule/:user', (req, res) => {
 
     try {
         sche = JSON.parse(fs.readFileSync('users-' + u + '.json', 'utf8'));
-        
-    }catch (err) {
+
+    } catch (err) {
     }
 
     if (exist) {
@@ -274,7 +274,44 @@ router.get('/authall/allschedules/list/:user', (req, res) => {
 
 
 
+router.put('/add/review/:course/:user', (req, res) => {
 
+    const keyPairs = req.body;
+
+    console.log(keyPairs);
+
+    //var exist = false;
+
+
+    var rev = JSON.parse(fs.readFileSync('course-review.json', 'utf8'));
+
+    //JSON.parse(rev);
+
+    console.log(rev);
+    /*rev.forEach((element) => {
+        if (element.scheduleName === s) {
+            exist = true;
+        }
+    });*/
+
+    var pair = JSON.stringify(keyPairs);
+
+    rev.push(pair);
+
+    var jsonString = JSON.stringify(rev)
+
+    fs.writeFileSync('course-review.json', jsonString, err => {
+        if (err) {
+            console.log('Error writing file', err)
+        } else {
+            console.log('Successfully wrote file')
+        }
+    })
+
+
+    res.send(rev);
+
+});
 
 
 
