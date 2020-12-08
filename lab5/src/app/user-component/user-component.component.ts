@@ -1,4 +1,3 @@
-
 import { EventEmitter } from '@angular/core';
 import { Component, OnInit, Output } from '@angular/core';
 import { FirebaseService } from '../services/auth.service';
@@ -12,7 +11,7 @@ import { DOCUMENT } from '@angular/common';
 })
 export class UserComponentComponent {
 
-  title = 'SE 3316 Lab 4';
+  title = 'SE 3316 Lab 5';
   @Output() isLogout = new EventEmitter<void>()
 
   constructor(private subjectService: SubjectService, @Inject(DOCUMENT) document, public firebaseService: FirebaseService) { }

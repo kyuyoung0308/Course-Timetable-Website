@@ -65,14 +65,11 @@ export class AppComponent {
       alert("Successfully Displayed Results for: " + subUpper + " " + codeUpper + " " + component);
 
       response.forEach(info => {
-        //info["course_info"] = JSON.stringify(info["course_info"]);
         info["show"] = false;
         this.listInfo.push(info);
       })
 
       JSON.stringify(this.listInfo);
-
-      console.log(JSON.stringify(this.listInfo));
     })
   }
 
@@ -101,12 +98,11 @@ export class AppComponent {
       alert("Keyword must be longer than 4 characters")
     }else{
     var keyUpper = key.toUpperCase();
-    console.log(keyUpper);
-    //JSON.stringify(keyUpper);
+
     this.subjectService.keyword(keyUpper).subscribe((response: any) => {
       alert("Successfully Displayed Results for: " + keyUpper);
       response.forEach(info => {
-        //info["course_info"] = JSON.stringify(info["course_info"]);
+
         info["show"] = false;
         this.keys.push(info);
       })
