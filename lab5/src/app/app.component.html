@@ -7,6 +7,7 @@
   <p>Sign up now if you haven't. If you are authenticated Sign in below!</p>
   <h2>Sign Up!</h2>
   <input type="text" placeholder="Enter Email..." #emailSignup />
+  <button (click)="validateEmail(emailSignup.value)">Validate Email</button>
   <input type="text" placeholder="Enter Password..." #passwordSignup />
   <button (click)="onSignup(emailSignup.value,passwordSignup.value)">Sign Up</button>
 </div>
@@ -102,7 +103,7 @@
   <app-user-component *ngIf="isSignedIn && !isAdmin" (isLogout)="handleLogout()">Log out</app-user-component>
   <app-register-component *ngIf="isSignedIn && isAdmin" (isLogout)="handleLogout()">Log out</app-register-component>
   
-<div>
+<div >
   <hr>
   <h2>Copyright Enforcement</h2>
   <h3>Security and Privacy</h3>
@@ -133,6 +134,7 @@
   <div *ngIf="!isSignedIn">
     <h2>Adminstrator</h2>
     <input type="text" placeholder="Enter Email..." #email />
+    <button (click)="validateEmail(email.value)">Validate Email</button>
     <input type="text" placeholder="Enter Password..." #password /><br>
     <button (click)="onSignadmin(email.value,password.value)">Login as Admin</button><br><br>
   </div>

@@ -43,7 +43,7 @@ router.get('/question1/subjects', (req, res) => {
 
     var obj = JSON.parse(fs.readFileSync('Lab3-timetable-data.json', 'utf8'));
 
-    var className = [];
+
     var result = [];
 
     for (var i = 0; i < obj.length; i++) {
@@ -95,7 +95,11 @@ router.get('/question3/:subjectId/:course?/:component?', (req, res) => {
         }
         else if (subjectId === subject && course === courseCode && typeof component === "undefined") {
             array.push(info);
-        }else if (subjectId === subject && course === courseCode && typeof component !== "undefined") {
+        } else if (subjectId === subject && course === courseCode && typeof component !== "undefined") {
+            array.push(info);
+        } else if (typeof subjectId === "undefined" && course === courseCode && typeof component === "undefined") {
+            array.push(info);
+        } else if (typeof subjectId === "undefined" && course === courseCode && typeof component !== "undefined") {
             array.push(info);
         }
     })
@@ -103,8 +107,28 @@ router.get('/question3/:subjectId/:course?/:component?', (req, res) => {
     res.send(array);
 })
 
+//functionality to search for courses by course number
+router.get('/question3a/:course', (req, res) => {
 
+    var obj = JSON.parse(fs.readFileSync('Lab3-timetable-data.json', 'utf8'));
 
+    var array = [];
+    var course = req.params.course;
+
+    obj.forEach((timetable) => {
+        var courseCode = String(timetable.catalog_nbr);
+        courseCode = courseCode.substring(0,4);
+        if (courseCode.toLowerCase().includes(course.trim().toLowerCase())) {
+        var info = timetable;
+        if (typeof subjectId === "undefined" && course === courseCode && typeof component === "undefined") {
+                array.push(info);
+            
+        }
+    }
+    })
+    console.log(array);
+    res.send(array);
+})
 //keywords
 router.get('/keywords/:key', (req, res) => {
 
@@ -115,7 +139,7 @@ router.get('/keywords/:key', (req, res) => {
 
     obj.forEach((timetable) => {
         var classN = timetable.className;
-        var courseCode = String (timetable.catalog_nbr);
+        var courseCode = String(timetable.catalog_nbr);
         var info = timetable;
 
         if (classN.toLowerCase().includes(keyword.trim().toLowerCase()) || courseCode.toLowerCase().includes(keyword.trim().toLowerCase())) {
@@ -266,6 +290,7 @@ router.delete('/users/deleteschedule/:schedule/:user', (req, res) => {
 
 });
 
+//api call to get the course reviews
 router.get('/view/review', (req, res) => {
 
     var sche = JSON.parse(fs.readFileSync('course-review.json', 'utf8'));
@@ -283,13 +308,14 @@ router.get('/authall/allschedules/list/:user', (req, res) => {
     res.send(sche);
 });
 
-router.patch('/toggle/course/:course', (req, res)=>{
+//toggle the visibility function
+router.patch('/toggle/course/:course', (req, res) => {
     let s = req.params.course;
     //let u = req.params.user;
     var tog = JSON.parse(fs.readFileSync('course-review.json', 'utf8'));
 
-    tog.forEach(element =>{
-        if(element.catalog_nbr == s)
+    tog.forEach(element => {
+        if (element.catalog_nbr == s)
             element.visible = !element.visible;
     })
     var jsonString = JSON.stringify(tog);
@@ -304,13 +330,14 @@ router.patch('/toggle/course/:course', (req, res)=>{
     res.send("");
 });
 
-router.patch('/toggle/flag/:schedule/:user', (req, res)=>{
+//toggle visibility flag of the schedules
+router.patch('/toggle/flag/:schedule/:user', (req, res) => {
     let s = req.params.schedule;
     let u = req.params.user;
     var sche = JSON.parse(fs.readFileSync('users-' + u + '.json', 'utf8'));
 
-    sche.forEach(element =>{
-        if(element.scheduleName == s)
+    sche.forEach(element => {
+        if (element.scheduleName == s)
             element.visible = !element.visible;
     })
     var jsonString = JSON.stringify(sche);
@@ -325,6 +352,7 @@ router.patch('/toggle/flag/:schedule/:user', (req, res)=>{
     res.send("");
 });
 
+//adding a review
 router.put('/add/review/:course/:user', (req, res) => {
 
     const keyPairs = req.body[0];
@@ -333,7 +361,7 @@ router.put('/add/review/:course/:user', (req, res) => {
 
     var rev = JSON.parse(fs.readFileSync('course-review.json', 'utf8'));
     console.log(rev);
- 
+
 
     var pair = keyPairs;
 
@@ -371,83 +399,80 @@ router.delete('/question9/delete/all/schedules', (req, res) => {
     res.send(sche);
 });
 
-router.get ('/display/security', (req,res)=>{
+router.get('/display/security', (req, res) => {
     var security = JSON.parse(fs.readFileSync('admin-security.json', 'utf8'));
     res.send(security);
-}); 
+});
 
 router.put('/update/security', (req, res) => {
 
     const update = req.body;
-    console.log (update);
-    //var info = JSON.parse(fs.readFileSync('admin-security.json', 'utf8'));
+    console.log(update);
+    var jsonString = JSON.stringify(update)
 
-        //info.push(update)
-        var jsonString = JSON.stringify(update)
+    console.log(jsonString)
 
-        console.log(jsonString)
-
-        fs.writeFileSync('admin-security.json', jsonString, err => {
-            if (err) {
-                console.log('Error writing file', err)
-            } else {
-                console.log('Successfully wrote file')
-            }
-        })
+    fs.writeFileSync('admin-security.json', jsonString, err => {
+        if (err) {
+            console.log('Error writing file', err)
+        } else {
+            console.log('Successfully wrote file')
+        }
+    })
 
 
     res.send(jsonString);
 
 });
+
 router.put('/update/aup', (req, res) => {
 
     const update = req.body;
-    console.log (update);
+    console.log(update);
 
-        var jsonString = JSON.stringify(update)
+    var jsonString = JSON.stringify(update)
 
-        console.log(jsonString)
+    console.log(jsonString)
 
-        fs.writeFileSync('admin-aup.json', jsonString, err => {
-            if (err) {
-                console.log('Error writing file', err)
-            } else {
-                console.log('Successfully wrote file')
-            }
-        })
+    fs.writeFileSync('admin-aup.json', jsonString, err => {
+        if (err) {
+            console.log('Error writing file', err)
+        } else {
+            console.log('Successfully wrote file')
+        }
+    })
 
 
     res.send(jsonString);
 
 });
-router.get ('/display/aup', (req,res)=>{
+router.get('/display/aup', (req, res) => {
     var aup = JSON.parse(fs.readFileSync('admin-aup.json', 'utf8'));
     res.send(aup);
 });
 
-
 router.put('/update/dmca', (req, res) => {
 
     const update = req.body;
-    console.log (update);
-        var jsonString = JSON.stringify(update)
+    console.log(update);
+    var jsonString = JSON.stringify(update)
 
-        console.log(jsonString)
+    console.log(jsonString)
 
-        fs.writeFileSync('admin-dmca.json', jsonString, err => {
-            if (err) {
-                console.log('Error writing file', err)
-            } else {
-                console.log('Successfully wrote file')
-            }
-        })
+    fs.writeFileSync('admin-dmca.json', jsonString, err => {
+        if (err) {
+            console.log('Error writing file', err)
+        } else {
+            console.log('Successfully wrote file')
+        }
+    })
 
 
     res.send(jsonString);
 
 });
 
-router.get ('/display/dmca', (req,res)=>{
+router.get('/display/dmca', (req, res) => {
     var dmca = JSON.parse(fs.readFileSync('admin-dmca.json', 'utf8'));
     res.send(dmca);
 });

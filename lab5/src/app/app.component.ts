@@ -70,13 +70,6 @@ export class AppComponent {
         this.listInfo.push(info);
       })
 
-      /*for (let info in response) {
-        console.log(info);
-        //info["course_info"] = JSON.stringify(info["course_info"]);
-        this.listInfo.push(response[info]);      
-      }*/
-      //this.listInfo=response;
-
       JSON.stringify(this.listInfo);
 
       console.log(JSON.stringify(this.listInfo));
@@ -104,7 +97,9 @@ export class AppComponent {
   keys = [];
   searchKeyword() {
     var key = sanitize((<HTMLInputElement>document.getElementById("searchKey")).value)
-
+    if (key.length < 4){
+      alert("Keyword must be longer than 4 characters")
+    }else{
     var keyUpper = key.toUpperCase();
     console.log(keyUpper);
     //JSON.stringify(keyUpper);
@@ -115,22 +110,9 @@ export class AppComponent {
         info["show"] = false;
         this.keys.push(info);
       })
-    })}
+    })}}
 
-}
-function sanitize(string) {
-  const map = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#x27;',
-    "/": '&#x2F;',
-  };
-  const reg = /[&<>"'/]/ig;
-  return string.toString().replace(reg, (match) => (map[match]));
-}
-function validateEmail(email: string)
+    validateEmail(email: string)
 {
 var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 if(email.match(mailformat))
@@ -145,4 +127,17 @@ alert("You have entered an invalid email address!");
 
 return false;
 }
+}
+}
+function sanitize(string) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#x27;',
+    "/": '&#x2F;',
+  };
+  const reg = /[&<>"'/]/ig;
+  return string.toString().replace(reg, (match) => (map[match]));
 }

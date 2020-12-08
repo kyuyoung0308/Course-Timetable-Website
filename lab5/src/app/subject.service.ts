@@ -24,12 +24,11 @@ export class SubjectService {
   }
 
   onSearch(subject, course, component) {
-    console.log(`${this.url}/question3/` + subject + `/` + course+`/`+component);
     if(course === "" && component === ""){
       return this.http.get(`${this.url}/question3/` + subject);
     }
-    else if (component === "" && typeof subject !== "undefined" && typeof course !== "undefined"){
-      return this.http.get(`${this.url}/question3/` + subject + `/` + course);
+    else if (subject === "" && typeof course !== "undefined"){
+      return this.http.get(`${this.url}/question3a/` + course);
     }
     else
       return this.http.get(`${this.url}/question3/` + subject + `/` + course+`/`+component);
@@ -85,7 +84,7 @@ export class SubjectService {
 
     return this.http.put(`${this.url}/update/security/`, body, httpOptions)
   }
-  
+
   displaySec(){
     return this.http.get(`${this.url}/display/security/`)
   }
