@@ -9,3 +9,9 @@
     overflow: visible;
     height: auto;
   }
+  .button2 {
+    background-color: white;
+  color: black;
+  border: 5px solid #4CAF50;
+    font-size: 16px;
+  }

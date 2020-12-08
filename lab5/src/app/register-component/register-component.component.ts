@@ -18,10 +18,12 @@ export class RegisterComponentComponent implements OnInit {
   @Output() isLogout = new EventEmitter<void>()
   
   constructor(private subjectService: SubjectService, @Inject(DOCUMENT) document, public firebaseService: FirebaseService) { }
+
   logout() {
     this.firebaseService.logout()
     this.isLogout.emit()
   }
+  
   security(){
     var sec = (<HTMLInputElement>document.getElementById("security")).value
     this.subjectService.updateSecurity(sec).subscribe((response: any) => {
@@ -29,6 +31,7 @@ export class RegisterComponentComponent implements OnInit {
 
     })
   }
+
   aup(){
     var aup = (<HTMLInputElement>document.getElementById("aup")).value
     this.subjectService.updateAup(aup).subscribe((response: any) => {
@@ -36,16 +39,8 @@ export class RegisterComponentComponent implements OnInit {
 
     })
   }
-  dmca(){
-    var dmca = (<HTMLInputElement>document.getElementById("dmca")).value
-    this.subjectService.updateDmca(dmca).subscribe((response: any) => {
-      alert("Successfully updated");
-
-    })
-  }
 
   revArray =[]
-
   review(){
     this.subjectService.viewReview().subscribe((response: any) => {
         this.revArray = response;
@@ -54,6 +49,14 @@ export class RegisterComponentComponent implements OnInit {
   courseToggle(course){
     this.subjectService.toggleCourse(course).subscribe((response: any )=>{
       return null;
+    })
+  }
+  
+  dmca(){
+    var dmca = (<HTMLInputElement>document.getElementById("dmca")).value
+    this.subjectService.updateDmca(dmca).subscribe((response: any) => {
+      alert("Successfully updated");
+
     })
   }
   
