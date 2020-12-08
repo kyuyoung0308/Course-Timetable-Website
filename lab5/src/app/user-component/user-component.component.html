@@ -64,7 +64,7 @@
 
             <li *ngFor="let subject of viewSche">
                 <span>Schedule Name: {{subject.scheduleName}}</span><br>
-                <span>Last Edited: {{subject.lastModified}}</span>
+                <span>Last Edited: {{subject.lastModified}}</span><br>
                 <span>Visibility: {{subject.visible ? 'true':'false'}}</span>
                 <button (click)="subject.visible = !subject.visible;toggleFlag(subject.scheduleName)">Toggle Visibilty</button>
                 <div class="container" [class.show]="subject.show">

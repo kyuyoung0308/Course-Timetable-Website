@@ -1,1 +1,1 @@
-["[{\"user\":\"testing\",\"catalog_nbr\":\"1233\",\"review\":\"aaa\"}]","[{\"user\":\"testing\",\"catalog_nbr\":\"11111\",\"review\":\"wwwww\"}]"]
+[{"user":"testing","catalog_nbr":"12345","review":"awesome","visible":false},{"user":"testing","catalog_nbr":"55","review":"really good","visible":false},{"user":"testing","catalog_nbr":"222","review":"wow","visible":false}]

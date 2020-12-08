@@ -22,11 +22,26 @@ export class RegisterComponentComponent implements OnInit {
     this.firebaseService.logout()
     this.isLogout.emit()
   }
-  aup(){
+  security(){
+    var sec = (<HTMLInputElement>document.getElementById("security")).value
+    this.subjectService.updateSecurity(sec).subscribe((response: any) => {
+      alert("Successfully updated");
 
+    })
+  }
+  aup(){
+    var aup = (<HTMLInputElement>document.getElementById("aup")).value
+    this.subjectService.updateAup(aup).subscribe((response: any) => {
+      alert("Successfully updated");
+
+    })
   }
   dmca(){
+    var dmca = (<HTMLInputElement>document.getElementById("dmca")).value
+    this.subjectService.updateDmca(dmca).subscribe((response: any) => {
+      alert("Successfully updated");
 
+    })
   }
 
   revArray =[]
@@ -41,13 +56,7 @@ export class RegisterComponentComponent implements OnInit {
       return null;
     })
   }
-  security(){
-    var sec = (<HTMLInputElement>document.getElementById("security")).value
-    this.subjectService.updateSecurity(sec).subscribe((response: any) => {
-      alert("Successfully updated");
-      console.log(JSON.stringify(response));
-    })
-  }
+  
   ngOnInit(): void {
   }
 

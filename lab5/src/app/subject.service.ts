@@ -75,7 +75,6 @@ export class SubjectService {
 
   updateSecurity(info){
     var sanInfo = sanitize(info);
-
     
     var security = [{
       "security": `${sanInfo}`,
@@ -85,6 +84,44 @@ export class SubjectService {
     console.log(JSON.stringify(security));
 
     return this.http.put(`${this.url}/update/security/`, body, httpOptions)
+  }
+  
+  displaySec(){
+    return this.http.get(`${this.url}/display/security/`)
+  }
+
+  displayDmca(){
+    return this.http.get(`${this.url}/display/dmca/`)
+  }
+
+  displayAup(){
+    return this.http.get(`${this.url}/display/aup/`)
+  }
+
+  updateAup(info){
+    var sanInfo = sanitize(info);
+    
+    var aup = [{
+      "aup": `${sanInfo}`,
+    }]
+    var body = aup
+
+    console.log(JSON.stringify(aup));
+
+    return this.http.put(`${this.url}/update/aup/`, body, httpOptions)
+  }
+
+  updateDmca(info){
+    var sanInfo = sanitize(info);
+    
+    var dmca = [{
+      "dmca": `${sanInfo}`,
+    }]
+    var body = dmca
+
+    console.log(JSON.stringify(dmca));
+
+    return this.http.put(`${this.url}/update/dmca/`, body, httpOptions)
   }
 
   viewReview(){

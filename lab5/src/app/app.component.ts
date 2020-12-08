@@ -82,6 +82,25 @@ export class AppComponent {
       console.log(JSON.stringify(this.listInfo));
     })
   }
+
+  securityInfo=[]
+  displaySecurity(){
+    this.subjectService.displaySec().subscribe((response: any)=>{
+      this.securityInfo= response;
+    })
+  }
+  aupInfo=[]
+  displayPolicy(){
+    this.subjectService.displayAup().subscribe((response: any)=>{
+      this.aupInfo= response;
+    })
+  }
+  dmcaInfo=[]
+  displayNotice(){
+    this.subjectService.displayDmca().subscribe((response: any)=>{
+      this.dmcaInfo= response;
+    })
+  }
   keys = [];
   searchKeyword() {
     var key = sanitize((<HTMLInputElement>document.getElementById("searchKey")).value)
