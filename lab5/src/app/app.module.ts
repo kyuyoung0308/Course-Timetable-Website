@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {SubjectsComponent} from './subjects/subjects.component';
+
 import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,7 +12,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
-import { LoginComponentComponent } from './login-component/login-component.component';
 import { RegisterComponentComponent } from './register-component/register-component.component';
 import { UserComponentComponent } from './user-component/user-component.component';
 import { FirebaseService } from './services/auth.service';
@@ -21,8 +20,6 @@ import { FirebaseService } from './services/auth.service';
 @NgModule({
   declarations: [
     AppComponent,
-    SubjectsComponent,
-    LoginComponentComponent,
     RegisterComponentComponent,
     UserComponentComponent
   ],
