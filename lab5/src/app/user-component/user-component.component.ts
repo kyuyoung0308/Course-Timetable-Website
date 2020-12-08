@@ -5,8 +5,6 @@ import { FirebaseService } from '../services/auth.service';
 import { SubjectService } from 'src/app/subject.service';
 import { Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { stringify } from 'querystring';
-
 @Component({
   selector: 'app-user-component',
   templateUrl: './user-component.component.html',
@@ -77,7 +75,6 @@ export class UserComponentComponent {
   }
 
   displayOne = [];
-
   displaySchedule() {
     var display = (<HTMLInputElement>document.getElementById("scheduleInput")).value
 

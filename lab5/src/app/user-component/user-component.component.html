@@ -1,11 +1,9 @@
 <div class="X">
     <button (click)="logout()">Logout</button>
-    <h1>{{title}}</h1>
+    <h1>Welcome to the Timetable</h1>
 
     <button class="buttonr" (click)="refresh()">Refresh</button><br><br>
-
     <div class="X">
-
         <h1>All Subjects</h1>
         <button class="button1" (click)="viewSubjects()">View All Subjects</button>
 
@@ -15,13 +13,11 @@
                 <span>Class Name: {{obj.className}}</span><br><br>
             </li>
         </ul>
-
     </div>
     <div>
         <input id="listCode" type="text" placeholder="Enter a Subject" />
         <button class="button" (click)="listCodes()">List Course Codes</button><br><br>
     </div>
-
 
     <div>
         <input type="text" placeholder="Enter a Schedule..." id="q5Schedule">
