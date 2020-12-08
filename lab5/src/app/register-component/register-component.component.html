@@ -1,1 +1,49 @@
-<button (click)="logout()">Logout</button>
+<div class="X">
+    <button (click)="logout()">Logout</button>
+    <br>
+    <button class="button" (click)="review()">View All Reviews</button><br><br>
+    <ul>
+        <li *ngFor="let info of revArray">
+            <hr>
+            <span>UserName: {{info.user}}</span><br>
+            <span>Course Code: {{info.catalog_nbr}}</span><br>
+            <div class="container" [class.show]="info.visible"><br><br><br><br>Review: {{info.review}}</div><br>
+            <span>Visibility: {{info.visible ? 'true':'false'}}</span>
+            <button (click)="info.visible = !info.visible;courseToggle(info.catalog_nbr)">Toggle Visibilty</button>
+        </li>
+    </ul>
+    <!--<ul>
+        <li *ngFor="let course of ">
+            <br>
+            <span>Subject Name: {{course.subject}}</span><br>
+            <span>Course Code: {{course.catalog_nbr}}</span><br>
+            <span>Visibility: {{subject.visible ? 'true':'false'}}</span>
+    <button (click)="subject.visible = !subject.visible;toggleFlag(subject.scheduleName)">Toggle Visibilty</button>
+        </li>
+    </ul>-->
+
+    <div>
+        <hr>
+        <h2>Copyright Enforcement</h2>
+        <h3>Security and Privacy</h3><br>
+        <input type="text" placeholder="Update Security and Privacy...." id="security">
+        <button class="button" (click)="security()">Update</button><br><br>
+        <br><br>
+        <span>Info</span><br><br>
+
+        <hr>
+        <h3>Acceptable Use Policy (AUP)</h3><br>
+        <input type="text" placeholder="Update AUP...." id="aup">
+        <button class="button" (click)="aup()">Update</button><br><br>
+        <br><br>
+        <span>Info</span><br><br>
+
+        <hr>
+        <h3>DMCA Notice and Takedown Policy</h3><br>
+        <input type="text" placeholder="Update DMCA...." id="dmca">
+        <button class="button" (click)="dmca()">Update</button><br><br>
+        <br><br>
+        <span>Info</span><br><br>
+
+    </div>
+</div>

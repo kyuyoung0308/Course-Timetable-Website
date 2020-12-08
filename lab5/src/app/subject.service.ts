@@ -73,6 +73,24 @@ export class SubjectService {
     return this.http.get(`${this.url}/authcourse/courselist/` + san+'/'+userName[0])
   }
 
+  updateSecurity(info){
+    var sanInfo = sanitize(info);
+
+    
+    var security = [{
+      "security": `${sanInfo}`,
+    }]
+    var body = security
+
+    console.log(JSON.stringify(security));
+
+    return this.http.put(`${this.url}/update/security/`, body, httpOptions)
+  }
+
+  viewReview(){
+    return this.http.get(`${this.url}/view/review`);
+  }
+
   viewSubject() {
     //we want to send a web request to display list
     console.log(this.url.toString());
@@ -84,6 +102,16 @@ export class SubjectService {
     var userName = mail.split("@");
     return this.http.get(`${this.url}/authall/allschedules/list`+'/'+userName[0]);
 
+  }
+  toggleCourse(course){
+    var body ={};
+    return this.http.patch(`${this.url}/toggle/course/`+course,body);
+  }
+  toggleVisible(schedule){
+    var body ={};
+    var mail = JSON.parse(localStorage.user).email;
+    var userName = mail.split("@");
+    return this.http.patch(`${this.url}/toggle/flag/`+schedule+'/'+userName[0],body);
   }
   deleteSchedule(schedule) {
     var san = sanitize(schedule);

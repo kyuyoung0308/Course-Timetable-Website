@@ -16,6 +16,7 @@ export class UserComponentComponent {
 
   title = 'SE 3316 Lab 4';
   @Output() isLogout = new EventEmitter<void>()
+
   constructor(private subjectService: SubjectService, @Inject(DOCUMENT) document, public firebaseService: FirebaseService) { }
 
   refresh(): void {
@@ -45,11 +46,9 @@ export class UserComponentComponent {
     var sub = sanitize((<HTMLInputElement>document.getElementById("q5Subject")).value)
     var course = sanitize((<HTMLInputElement>document.getElementById("q5Course")).value)
 
-    var lastModified = document.lastModified;
-
     this.subjectService.addCourse(sche, sub, course).subscribe((response: any) => {
       alert("Successfully Added " + sub + " " + course + " to: " + sche);
-      console.log(lastModified);
+
     })
   }
 
@@ -116,7 +115,12 @@ export class UserComponentComponent {
       console.log(JSON.stringify(response));
     })
   }
-
+  toggleFlag(schedule){
+    
+    this.subjectService.toggleVisible(schedule).subscribe((response: any )=>{
+      return null;
+    })
+  }
   deleteAll() {
     this.subjectService.delete().subscribe((response: any) => {
       console.log("yes");

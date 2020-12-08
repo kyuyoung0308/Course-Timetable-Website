@@ -18,6 +18,7 @@ export class AppComponent {
   constructor(private subjectService: SubjectService, public firebaseService: FirebaseService) {
 
   }
+  
   ngOnInit() {
     if (localStorage.getItem('user') != null)
       this.isSignedIn = true
@@ -33,6 +34,7 @@ export class AppComponent {
       this.isSignedIn = true
   }
   async onSignin(email: string, password: string) {
+
     await this.firebaseService.signin(email, password)
     if (this.firebaseService.isLoggedIn)
       this.isSignedIn = true
@@ -108,4 +110,20 @@ function sanitize(string) {
   };
   const reg = /[&<>"'/]/ig;
   return string.toString().replace(reg, (match) => (map[match]));
+}
+function validateEmail(email: string)
+{
+var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+if(email.match(mailformat))
+{
+alert("Valid email address!");
+
+return true;
+}
+else
+{
+alert("You have entered an invalid email address!");
+
+return false;
+}
 }

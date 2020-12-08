@@ -15,7 +15,9 @@
 <div *ngIf="!isSignedIn && !isAdmin">
   <h2>Sign In!</h2>
   <input type="text" placeholder="Enter Email..." #email />
+  <button (click)="validateEmail(email.value)">Validate Email</button>
   <input type="text" placeholder="Enter Password..." #password />
+
   <button (click)="onSignin(email.value,password.value)">Sign In</button>
 </div>
 <hr>

@@ -22,7 +22,45 @@ export class RegisterComponentComponent implements OnInit {
     this.firebaseService.logout()
     this.isLogout.emit()
   }
+  aup(){
+
+  }
+  dmca(){
+
+  }
+
+  revArray =[]
+
+  review(){
+    this.subjectService.viewReview().subscribe((response: any) => {
+        this.revArray = response;
+    })
+  }
+  courseToggle(course){
+    this.subjectService.toggleCourse(course).subscribe((response: any )=>{
+      return null;
+    })
+  }
+  security(){
+    var sec = (<HTMLInputElement>document.getElementById("security")).value
+    this.subjectService.updateSecurity(sec).subscribe((response: any) => {
+      alert("Successfully updated");
+      console.log(JSON.stringify(response));
+    })
+  }
   ngOnInit(): void {
   }
 
+}
+function sanitize(string) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#x27;',
+    "/": '&#x2F;',
+  };
+  const reg = /[&<>"'/]/ig;
+  return string.toString().replace(reg, (match) => (map[match]));
 }
