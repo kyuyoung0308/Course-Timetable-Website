@@ -18,11 +18,9 @@ export class SubjectService {
   constructor(private http: HttpClient) {
 
   }
-
   keyword(key){
     return this.http.get(`${this.url}/keywords/` +key);
   }
-
   onSearch(subject, course, component) {
     if(course === "" && component === ""){
       return this.http.get(`${this.url}/question3/` + subject);
@@ -128,8 +126,6 @@ export class SubjectService {
   }
 
   viewSubject() {
-    //we want to send a web request to display list
-    console.log(this.url.toString());
     return this.http.get(`${this.url}/question1/subjects`);
   }
 

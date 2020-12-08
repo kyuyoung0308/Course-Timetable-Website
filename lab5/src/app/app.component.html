@@ -91,15 +91,7 @@
 </div>
 <app-login-component *ngIf="!isSignedIn && click"></app-login-component>
 
-
-
-
-
-
-
-
   <br><br>
-  
   <app-user-component *ngIf="isSignedIn && !isAdmin" (isLogout)="handleLogout()">Log out</app-user-component>
   <app-register-component *ngIf="isSignedIn && isAdmin" (isLogout)="handleLogout()">Log out</app-register-component>
   
