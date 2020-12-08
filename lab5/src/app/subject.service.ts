@@ -6,14 +6,13 @@ const httpOptions = {
     'Content-Type': 'application/json'
   })
 }
-
 const ip = window.location.href.substr(0, window.location.href.length -1)
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectService {
 
-  url: string = "http://localhost" + ':3000/api'
+  url: string = ip + ':3000/api'
 
   constructor(private http: HttpClient) {
 
