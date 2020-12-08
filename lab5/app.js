@@ -191,7 +191,7 @@ router.put('/authentic/new/:schedule/:user', (req, res) => {
 });
 
 
-
+//creating a new course to a schedule
 router.put('/create/newcourse/:schedule/:user', (req, res) => {
 
     const keyPairs = req.body;
@@ -399,11 +399,12 @@ router.delete('/question9/delete/all/schedules', (req, res) => {
     res.send(sche);
 });
 
+//gets the security information 
 router.get('/display/security', (req, res) => {
     var security = JSON.parse(fs.readFileSync('admin-security.json', 'utf8'));
     res.send(security);
 });
-
+//updates the security information
 router.put('/update/security', (req, res) => {
 
     const update = req.body;
@@ -446,6 +447,7 @@ router.put('/update/aup', (req, res) => {
     res.send(jsonString);
 
 });
+//gets the aup information 
 router.get('/display/aup', (req, res) => {
     var aup = JSON.parse(fs.readFileSync('admin-aup.json', 'utf8'));
     res.send(aup);
@@ -471,7 +473,7 @@ router.put('/update/dmca', (req, res) => {
     res.send(jsonString);
 
 });
-
+//gets the dmca information 
 router.get('/display/dmca', (req, res) => {
     var dmca = JSON.parse(fs.readFileSync('admin-dmca.json', 'utf8'));
     res.send(dmca);
